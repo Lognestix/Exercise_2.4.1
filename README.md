@@ -32,10 +32,8 @@ public class SQRService {
         int totalMatchingNumbers = 0;                   //Начальное количество совпадений
         for (int cycle = 10; cycle < 99; cycle++) {     //Инициализация границ перебора
             int squareNumber = cycle * cycle;           //Возведение в квадрат
-            if (squareNumber >= minValue) {             //Сравнение с заданным минимальным числом
-                if (squareNumber <= maxValue) {         //Сравнение с заданным максимальным числом
-                    totalMatchingNumbers++;             //Увеличение на 1 за каждую пройденную сумму сравнений
-                }
+            if (squareNumber >= minValue && squareNumber <= maxValue) {     //Сравнение с заданным диапазоном
+                totalMatchingNumbers++;                                     //Увеличение на 1 за каждую пройденную сумму сравнений
             }
         }
         return (totalMatchingNumbers);                  //Возврат результата
