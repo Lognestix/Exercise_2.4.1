@@ -1,64 +1,24 @@
-# В pom.xml добавлены поддержка junit-jupiter и подходящий ему maven-surefire-plugin
-
-```xml
-<dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
-        </plugins>
-    </build>
-```
-
-# Код Java находящийся в этом репозитории
-
-```Java
-package ru.netology.sqr;
-
-public class SQRService {
-    //Инициализация метода сравнения квадратов двухзначных чисел:
-    public int comparisonOfSquaresOfTwoDigitNumbers(int minValue, int maxValue) {
-        int totalMatchingNumbers = 0;                   //Начальное количество совпадений
-        for (int cycle = 10; cycle < 99; cycle++) {     //Инициализация границ перебора
-            int squareNumber = cycle * cycle;           //Возведение в квадрат
-            if (squareNumber >= minValue && squareNumber <= maxValue) {     //Сравнение с заданным диапазоном
-                totalMatchingNumbers++;                                     //Увеличение на 1 за каждую пройденную сумму сравнений
-            }
-        }
-        return (totalMatchingNumbers);                  //Возврат результата
-    }
-}
-```
-```Java
-package ru.netology.sqr;
-
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class SQRServiceTest {
-
-    @ParameterizedTest
-    @CsvSource (value = {"range 0 - 99, 0, 99, 0",              //Диапазон 0 - 100, итоговое число совпадений 0
-            "range 100 - 10000, 100, 10000, 89",                //Диапазон 100 - 10_000, итоговое число совпадений 89
-            "range 200 - 300, 200, 300, 3"})                    //Диапазон 200 - 300, итоговое число совпадений 3
-
-    void shouldComparisonOfSquaresOfTwoDigitNumbers(String testName, int minValue, int maxValue, int expected) {
-        SQRService service = new SQRService();
-        int actual = service.comparisonOfSquaresOfTwoDigitNumbers(minValue, maxValue);      //Вызов метода
-        assertEquals(expected, actual);                                                     //Выполняется проверка
-    }
-}
-```
+# Циклы и пакеты. Часть №1 (Exercise_2.4.1)
+## Домашнее задание по курсу "Java для тестировщиков"
+## Тема: «2.4. Циклы и пакеты. Часть №1», задание №1: «Количество квадратов»
+- Создан проект на базе Maven;
+- Добавлены в проект JUnit Jupiter & Surefire Plugin;
+- Создан класс, метод которого перебирает числа от 10 до 99 и считает сколько из их квадратов попали в определённый диапазон чисел, границы которого заданы параметрами этого метода (границы входят в диапазон);
+- Созданы соотвествующие авто-тесты.
+### Предварительные требования
+- На компьютере пользователя должна быть установлена:
+	- Intellij IDEA
+### Установка и запуск
+1. Склонировать проект на свой компьютер
+	- открыть терминал
+	- ввести команду 
+		```
+		git clone https://github.com/Lognestix/Exercise_2.4.1
+		```
+1. Открыть склонированный проект в Intellij IDEA
+1. Запустить авто-тесты:
+	- Нажать два раза CTRL;
+	- Ввести команду 
+		```
+		mvn clean test
+		```
